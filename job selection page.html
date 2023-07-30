@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Selection Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #007bff; /* Updated to blue (#007bff) */
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    main {
+      padding: 1rem;
+    }
+
+    .job-list {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    li:hover {
+      background-color: #f5f5f5;
+    }
+
+    li.selected {
+      background-color: #007bff;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Job Selection Page</h1>
+  </header>
+  <main>
+    <div class="job-list">
+      <h2>Open Jobs</h2>
+      <ul id="jobs"></ul>
+    </div>
+  </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const jobList = document.getElementById('jobs');
+
+      // Sample job data (replace this with actual data from your backend)
+      const openJobs = [
+        { id: 1, title: 'House Manager', location: 'Saudi Arabia' },
+        { id: 2, title: 'Care Giver', location: 'Australia' },
+        { id: 3, title: 'Security Guard', location: 'Qatar' },
+        // Add more job objects as needed...
+      ];
+
+      // Function to display jobs in the list
+      function displayJobs(jobs) {
+        jobList.innerHTML = '';
+
+        jobs.forEach(job => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `${job.title} - ${job.location}`;
+          listItem.setAttribute('data-id', job.id);
+
+          // Add click event listener to handle job selection
+          listItem.addEventListener('click', () => {
+            const selectedJob = document.querySelector('.selected');
+            if (selectedJob) {
+              selectedJob.classList.remove('selected');
+            }
+            listItem.classList.add('selected');
+            // You can store the selected job ID in a variable or send it to the backend for further processing
+            const selectedJobId = job.id;
+            console.log(`Selected Job ID: ${selectedJobId}`);
+          });
+
+          jobList.appendChild(listItem);
+        });
+      }
+
+      // Display the list of open jobs when the page loads
+      displayJobs(openJobs);
+    });
+  </script>
+</body>
+</html>
